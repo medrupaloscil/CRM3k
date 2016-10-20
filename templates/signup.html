@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block body %}
+<form action="{{ url_for('add_user') }}" method=post enctype="multipart/form-data">
+  <dl>
+    <dt>First Name:
+    <dd><input type=text size=30 name=prenom required>
+    <dt>Last Name:
+    <dd><input type=text size=30 name=nom required>
+    <dt>Company:
+    <dd><input type=text size=30 name=company required>
+    <dt>Photo:
+    <dd><input type="file" name="file" />
+    <dt>Status:
+    <dd><select name=status>
+      <option value="Prospect">Prospect</option>
+      <option value="Projet en cours">Projet en cours</option>
+      <option value="Projet terminé">Projet terminé</option>
+      <option value="Partenaire">Partenaire</option>
+    </select>
+    <dd><input type=submit value=signup>
+  </dl>
+</form>
+{% endblock %}

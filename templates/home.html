@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+{% block body %}
+<!-- Featured -->
+      <div class="wrapper style2">
+        <section class="container">
+          <header class="major">
+            <h2>Nos utilisateurs:</h2>
+          </header>
+          <div class="row no-collapse-1">
+          {% for user in users %}
+            <section class="4u">
+              <a href="#" class="image feature"><img src="{{user.picture}}" alt=""></a>
+              <h4>{{ user.prenom }} {{ user.nom }}</h4>
+              <p>Travaille pour {{ user.company }}<br>{{ user.status }}</p>
+            </section>
+          {% else %}
+            <span class="byline">Unbelievable.  No users here so far</span>
+          {% endfor %}
+        </div>
+        </section>
+      </div>
+
+    <!-- Main -->
+      <div id="main" class="wrapper style1">
+        <section class="container">
+          <header class="major">
+            <h2>Nos engagements</h2>
+            <span class="byline">Découvrez les points forts de CRM3k, le 3e va vous étonner !</span>
+          </header>
+          <div class="row">
+          
+            <!-- Content -->
+              <div class="6u">
+                <section>
+                  <ul class="style">
+                    <li>
+                      <span class="fa fa-wrench"></span>
+                      <h3>Une API puissante...</h3>
+                      <span>Une API crée par les meilleurs des meilleurs, qui saura apporter force et volupté à votre navigation.</span>
+                    </li>
+                    <li>
+                      <span class="fa fa-cloud"></span>
+                      <h3>Un site connecté</h3>
+                      <span>Toutes vos données sont sauvegardées, pourquoi ? Parce qu'on peut le faire !</span>
+                    </li>
+                  </ul>
+                </section>
+              </div>
+              <div class="6u">
+                <section>
+                  <ul class="style">
+                    <li>
+                      <span class="fa fa-cogs"></span>
+                      <h3>... Mais surtout bien pensée</h3>
+                      <span>Oui parce que sinon ça marcherait pas bien et ça nous ferait perdre du temps, donc de l'argent !</span>
+                    </li>
+                    <li>
+                      <span class="fa fa-leaf"></span>
+                      <h3>Un produit écologique</h3>
+                      <span>Bon, on avoue qu'on sait pas trop pourquoi mais c'est vendeur et ça satisfait la ménagère de 50 ans.</span>
+                    </li>
+                  </ul>
+                </section>
+              </div>
+
+          </div>
+        </section>
+      </div>
+  <ul class=entries>
+{% endblock %}
