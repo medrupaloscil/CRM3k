@@ -9,7 +9,7 @@
           <div class="row no-collapse-1">
           {% for user in users %}
             <section class="4u">
-              <a href="#" class="image feature"><img src="{{user.picture}}" alt=""></a>
+              <a href="#" class="image feature"><img src="/static/images/{{user.picture}}" alt=""></a>
               <h4>{{ user.prenom }} {{ user.nom }}</h4>
               <p>Travaille pour {{ user.company }}<br>{{ user.status }}</p>
             </section>
