@@ -6,7 +6,7 @@ Run flask app
 -------
 
 	$ export FLASK_APP=flaskr.py
-  $ flask run
+	$ flask run
   
   
 Run API
