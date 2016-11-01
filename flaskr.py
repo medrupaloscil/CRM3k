@@ -10,6 +10,8 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.config.from_object(__name__)
+app.secret_key = 'super secret key'
+app.config['SESSION_TYPE'] = 'filesystem'
 
 baseAPI = "http://127.0.0.1:5001/"
 
@@ -36,8 +38,14 @@ def add_user():
 
         f = request.files['file']
         filename = secure_filename(f.filename)
-        f.save("cdn/" + filename)
+        f.save("static/images/" + filename)
 
+        user_data = json.dumps({'prenom': request.form['prenom'], 'nom': request.form['nom'], 'company': request.form['company'], 'status': request.form['status'], 'file': filename})
         url = baseAPI + "createUser"
+        response = urllib.urlopen(url, user_data)
+        status = json.loads(response.read())
+        flash(status)
+    else:
+        flash("An error happend")
 
-    return redirect(url_for('home'))
+    return redirect(url_for('signup'))

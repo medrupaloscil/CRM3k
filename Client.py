@@ -20,7 +20,7 @@ class Client:
 
 	def get_users(self):
 		db = self.get_db()
-		cur = db.execute('select prenom, nom, company, status, picture from users order by id desc')
+		cur = db.execute('select * from users order by id desc')
 		users = cur.fetchall()
 		response = []
 		for user in users:

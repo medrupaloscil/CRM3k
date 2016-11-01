@@ -626,6 +626,10 @@
 			margin-bottom: 3em;
 		}
 
+		a.image.feature img {
+		    height: 300px;
+		}
+
 /* Footer */
 
 	#footer {

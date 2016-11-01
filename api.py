@@ -1,7 +1,8 @@
 import sqlite3
 import os
 import json
-from flask import Flask, jsonify, g
+import pprint
+from flask import Flask, jsonify, g, request
 from Client import Client
 
 
@@ -14,21 +15,6 @@ app.config.update(dict(
     USERNAME='admin',
     PASSWORD='default'
 ))
-
-tasks = [
-    {
-        'id': 1,
-        'title': u'Buy groceries',
-        'description': u'Milk, Cheese, Pizza, Fruit, Tylenol', 
-        'done': False
-    },
-    {
-        'id': 2,
-        'title': u'Learn Python',
-        'description': u'Need to find a good Python tutorial on the web', 
-        'done': False
-    }
-]
 
 container = Client(app)
 
@@ -51,14 +37,15 @@ def initdb_command():
 def api():
 	return "Hello World !"
 
-@app.route('/getAllUsers', methods=['GET', 'POST'])
+@app.route('/getAllUsers', methods=['GET'])
 def getAllUsers():
     return json.dumps(container.get_users())
 
-@app.route('/createUser')
+@app.route('/createUser', methods=['POST'])
 def createUser():
-	container.create_user(request.form['prenom'], request.form['nom'], request.form['company'], request.form['status'], filename)
-
+    datas = json.loads(request.get_data())
+    container.create_user(datas['prenom'], datas['nom'], datas['company'], datas['status'], datas['file'])
+    return json.dumps({'status': 200})
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5001)
