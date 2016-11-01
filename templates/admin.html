@@ -1,4 +1,26 @@
 {% extends "layout.html" %}
 {% block body %}
-  ADMIN
+  <table class="admin-user-table">
+  		<tr>
+  			<td>id</td>
+  			<td>Full Name</td>
+  			<td>Company</td>
+  			<td>Status</td>
+  			<td>Remove</td>
+  			<td>Update</td>
+  		</tr>
+  	{% for user in users %}
+  		<tr>
+  			<td>#{{ user.id }}</td>
+  			<td>{{ user.prenom }} {{ user.nom }}</td>
+  			<td>{{ user.company }}</td>
+  			<td>{{ user.status }}</td>
+  			<td><a href="{{ url_for('remove_user', user_id = user.id) }}">Remove</a></td>
+  			<td>Update</td>
+  		</tr>
+  	{% else %}
+	    <tr><td>Unbelievable.  No users here so far</td></tr>
+	{% endfor %}
+  </table>
+  <a href="#" class="admin-button">Export</a>
 {% endblock %}

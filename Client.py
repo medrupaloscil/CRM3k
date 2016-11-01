@@ -18,18 +18,36 @@ class Client:
 	        g.sqlite_db = self.connect_db()
 	    return g.sqlite_db
 
+	def clear_db(self):
+		db = self.get_db()
+		db.execute('DELETE FROM users WHERE 1')
+		db.commit()
+
 	def get_users(self):
 		db = self.get_db()
-		cur = db.execute('select * from users order by id desc')
+		cur = db.execute('SELECT * FROM users ORDER BY id desc')
 		users = cur.fetchall()
 		response = []
 		for user in users:
 			response.append(dict(user))
 		return response
 
+	def get_user_pk(self, user_id):
+		db = self.get_db()
+		cur = db.execute('SELECT * FROM users order WHERE id = %s' % user_id)
+		users = cur.fetchall()
+		response = dict(users[0])
+		return response
+
 	def create_user(self, name, lastname, company, status, picture):
 		db = self.get_db()
-		db.execute('insert into users (prenom, nom, company, status, picture) values (?, ?, ?, ?, ?)',
+		db.execute('INSERT INTO users (prenom, nom, company, status, picture) values (?, ?, ?, ?, ?)',
                      [name, lastname, company, status, picture])
+		db.commit()
+		return 1
+
+	def remove_user(self, user_id):
+		db = self.get_db()
+		db.execute('DELETE FROM users WHERE id = %s' % user_id)
 		db.commit()
 		return 1

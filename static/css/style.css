@@ -626,8 +626,49 @@
 			margin-bottom: 3em;
 		}
 
-		a.image.feature img {
+		.image.feature img {
 		    height: 300px;
+		}
+
+		.admin-user-table {
+			color: #FFF;
+		    margin: 2%;
+    		width: 95%;
+		    border: 2px solid;
+		}
+
+		.admin-user-table tr {
+			border: 1px solid;
+		}
+
+		.admin-user-table tr td {
+			padding: 5px;
+		}
+
+		.admin-button {
+			height: 50px;
+		    width: 110px;
+		    font-size: 20px;
+		    color: #FFF;
+		    background-color: #27263a;
+		    border: 1px solid;
+		    border-radius: 3px;
+		    margin: auto;
+		    display: block;
+		    cursor: pointer;
+		    text-align: center;
+		    text-decoration: none;
+		    padding: 10px;
+		}
+
+		.admin-button:hover {
+			background-color: #343342;
+		}
+
+		.flash {
+			background-color: #32b777;
+		    text-align: center;
+		    color: #000;
 		}
 
 /* Footer */
