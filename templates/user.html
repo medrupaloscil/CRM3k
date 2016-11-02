@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block body %}
+  <form method="POST" action="{{ url_for('update_user', user_id = user.id) }}">
+    <input type="text" value="{{ user.prenom }}" name="prenom" placeholder="Prénom">
+    <input type="text" value="{{ user.nom }}" name="nom" placeholder="Nom">
+    <input type="text" value="{{ user.company }}" name="company" placeholder="Compagnie">
+    <select name="status">
+      <option value="Prospect" {% if user.status == "Prospect" %}selected{% endif %}>Prospect</option>
+      <option value="Projet en cours" {% if user.status == "Projet en cours" %}selected{% endif %}>Projet en cours</option>
+      <option value="Projet terminé" {% if user.status == "Projet terminé" %}selected{% endif %}>Projet terminé</option>
+      <option value="Partenaire" {% if user.status == "Partenaire" %}selected{% endif %}>Partenaire</option>
+    </select>
+    <input type="submit" value="Modifier">
+  </form>
+{% endblock %}

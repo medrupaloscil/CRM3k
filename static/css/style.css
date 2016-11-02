@@ -646,7 +646,6 @@
 		}
 
 		.admin-button {
-			height: 50px;
 		    width: 110px;
 		    font-size: 20px;
 		    color: #FFF;
@@ -654,11 +653,12 @@
 		    border: 1px solid;
 		    border-radius: 3px;
 		    margin: auto;
+		    margin-bottom: 10px;
 		    display: block;
 		    cursor: pointer;
 		    text-align: center;
 		    text-decoration: none;
-		    padding: 10px;
+		    padding: 15px;
 		}
 
 		.admin-button:hover {
@@ -669,6 +669,10 @@
 			background-color: #32b777;
 		    text-align: center;
 		    color: #000;
+		}
+
+		tr.head {
+		    background-color: rgba(255,255,255,.3);
 		}
 
 /* Footer */

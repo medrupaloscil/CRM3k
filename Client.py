@@ -34,7 +34,7 @@ class Client:
 
 	def get_user_pk(self, user_id):
 		db = self.get_db()
-		cur = db.execute('SELECT * FROM users order WHERE id = %s' % user_id)
+		cur = db.execute('SELECT * FROM users WHERE id = %s' % user_id)
 		users = cur.fetchall()
 		response = dict(users[0])
 		return response
@@ -43,6 +43,13 @@ class Client:
 		db = self.get_db()
 		db.execute('INSERT INTO users (prenom, nom, company, status, picture) values (?, ?, ?, ?, ?)',
                      [name, lastname, company, status, picture])
+		db.commit()
+		return 1
+
+	def update_user(self, user_id, name, lastname, company, status):
+		db = self.get_db()
+		db.execute('UPDATE users SET prenom = ?, nom = ?, company = ?, status = ? WHERE id = %s' % user_id,
+                     [name, lastname, company, status])
 		db.commit()
 		return 1
 

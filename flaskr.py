@@ -35,6 +35,12 @@ def admin():
     users = getJSON(baseAPI + "getAllUsers")
     return render_template('admin.html', users=users)
 
+@app.route('/user/<user_id>')
+def user(user_id):
+    data = json.dumps({'id': user_id})
+    user = getJSON(baseAPI + "getOneUser", data)
+    return render_template('user.html', user=user)
+
 @app.route('/add', methods=['GET', 'POST'])
 def add_user():
     if request.method == 'POST':
@@ -57,11 +63,32 @@ def add_user():
 @app.route('/removeUser/<user_id>', methods=['GET', 'POST'])
 def remove_user(user_id):
 
-    user_data = json.dumps({'id': user_id})
-    status = getJSON(baseAPI + "removeUser", user_data)
+    user_data = json.dumps({'id': user_id,'prenom': request.form['prenom'], 'nom': request.form['nom'], 'company': request.form['company'], 'status': request.form['status'], 'file': filename})
+    status = getJSON(baseAPI + "updateUser", user_data)
     if status["status"] == 200 :
         flash("User deleted with success")
     else :
         flash("Error code %i", (status["status"]))
 
+    return redirect(url_for('admin'))
+
+@app.route('/updateUser/<user_id>', methods=['GET', 'POST'])
+def update_user(user_id):
+
+    user_data = json.dumps({'id': user_id, 'prenom': request.form['prenom'], 'nom': request.form['nom'], 'company': request.form['company'], 'status': request.form['status']})
+    status = getJSON(baseAPI + "updateUser", user_data)
+    if status["status"] == 200 :
+        flash("User updated with success")
+    else :
+        flash("Error => %s" % status["message"])
+
+    return redirect(url_for('user', user_id = user_id))
+
+@app.route('/clearDatabase')
+def clear_database():
+    status = getJSON(baseAPI + "clearDatabase")
+    if status["status"] == 200 :
+        flash("Users deleted with success")
+    else :
+        flash("Error code %i", (status["status"]))
     return redirect(url_for('admin'))

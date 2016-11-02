@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block body %}
   <table class="admin-user-table">
-  		<tr>
+  		<tr class="head">
   			<td>id</td>
   			<td>Full Name</td>
   			<td>Company</td>
@@ -16,11 +16,19 @@
   			<td>{{ user.company }}</td>
   			<td>{{ user.status }}</td>
   			<td><a href="{{ url_for('remove_user', user_id = user.id) }}">Remove</a></td>
-  			<td>Update</td>
+  			<td><a href="{{ url_for('user', user_id = user.id) }}">Update</a></td>
   		</tr>
   	{% else %}
-	    <tr><td>Unbelievable.  No users here so far</td></tr>
+	    <tr>
+	    	<td>Unbelievable.</td>
+  			<td>No</td>
+  			<td>users</td>
+  			<td>here</td>
+  			<td>so</td>
+  			<td>far</td>
+	    </tr>
 	{% endfor %}
   </table>
   <a href="#" class="admin-button">Export</a>
+  <a href="{{ url_for('clear_database') }}" class="admin-button">Clear Database</a>
 {% endblock %}

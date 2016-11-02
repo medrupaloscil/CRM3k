@@ -41,17 +41,40 @@ def api():
 def getAllUsers():
     return json.dumps(container.get_users())
 
+@app.route('/getOneUser', methods=['POST'])
+def getOneUser():
+    datas = json.loads(request.get_data())
+    if 'id' in datas:
+        return json.dumps(container.get_user_pk(datas["id"]))
+    else:
+        return json.dumps({'status': 500, 'message': "Missing arguments"})
+
 @app.route('/createUser', methods=['POST'])
 def createUser():
     datas = json.loads(request.get_data())
-    container.create_user(datas['prenom'], datas['nom'], datas['company'], datas['status'], datas['file'])
-    return json.dumps({'status': 200})
+    if 'prenom' in datas and 'nom' in datas and 'company' in datas and 'status' in datas and 'file' in datas:
+        container.create_user(datas['prenom'], datas['nom'], datas['company'], datas['status'], datas['file'])
+        return json.dumps({'status': 200})
+    else:
+        return json.dumps({'status': 500, 'message': "Missing arguments"})
+
+@app.route('/updateUser', methods=['POST'])
+def updateUser():
+    datas = json.loads(request.get_data())
+    if 'id' in datas and 'prenom' in datas and 'nom' in datas and 'company' in datas and 'status' in datas:
+        container.update_user(datas['id'],datas['prenom'], datas['nom'], datas['company'], datas['status'])
+        return json.dumps({'status': 200})
+    else:
+        return json.dumps({'status': 500, 'message': "Missing arguments"})
 
 @app.route('/removeUser', methods=['POST'])
 def removeUser():
     datas = json.loads(request.get_data())
-    container.remove_user(datas['id'])
-    return json.dumps({'status': 200})
+    if 'id' in datas:
+        container.remove_user(datas['id'])
+        return json.dumps({'status': 200})
+    else:
+        return json.dumps({'status': 500, 'message': "Missing arguments"})
 
 @app.route('/clearDatabase')
 def clearDatabase():
