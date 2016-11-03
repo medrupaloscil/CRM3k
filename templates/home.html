@@ -6,6 +6,10 @@
           <header class="major">
             <h2>Nos utilisateurs:</h2>
           </header>
+          <form method="POST" class="search" action="{{ url_for('search') }}">
+            <input type="text" name="query" placeholder="Search...">
+            <input type="submit" value="Rechercher">
+          </form>
           <div class="row no-collapse-1">
           {% for user in users %}
             <section class="4u">

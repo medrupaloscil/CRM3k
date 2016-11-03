@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block body %}
+<!-- Featured -->
+<div class="wrapper style2">
+  <section class="container">
+    <header class="major">
+      <h2>Nos utilisateurs:</h2>
+    </header>
+    <h3>Advanced search</h3>
+    <form method="POST" class="search" action="{{ url_for('search') }}">
+      <input type="text" name="prenom" placeholder="Prenom">
+      <input type="text" name="nom" placeholder="Nom">
+      <input type="text" name="company" placeholder="Company">
+      <input type="text" name="status" placeholder="Status">
+      <input type="submit" value="Rechercher">
+    </form>
+    <div class="row no-collapse-1">
+    {% for user in users %}
+      <section class="4u">
+        <a href='#' class="image feature"><img src="/static/images/{{user.picture}}" alt=""></a>
+        <h4>#{{ user.id }} {{ user.prenom }} {{ user.nom }}</h4>
+        <p>Travaille pour {{ user.company }}<br>{{ user.status }}</p>
+      </section>
+    {% else %}
+      <span class="byline">No Users founds.</span>
+    {% endfor %}
+  </div>
+  </section>
+</div>
+{% endblock %}

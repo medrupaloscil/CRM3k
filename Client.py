@@ -39,6 +39,53 @@ class Client:
 		response = dict(users[0])
 		return response
 
+	def search_users(self, query):
+		db = self.get_db()
+		cur = db.execute("SELECT * FROM users WHERE prenom='%s' OR nom='%s' OR company='%s' OR status='%s' ORDER BY id desc" % (query, query, query, query))
+		users = cur.fetchall()
+		response = []
+		for user in users:
+			response.append(dict(user))
+		return response
+
+	def complexe_search_users(self, prenom, nom, company, status):
+		req = 'SELECT * FROM users WHERE '
+
+		args = 0
+
+		if prenom != "":
+			if args > 0:
+				req += "AND "
+			args += 1
+			req += "prenom = '" + prenom + "' "
+		if nom != "":
+			if args > 0:
+				req += "AND "
+			args += 1
+			req += "nom = '" + nom + "' "
+		if company != "":
+			if args > 0:
+				req += "AND "
+			args += 1
+			req += "company = '" + company + "' "
+		if status != "":
+			if args > 0:
+				req += "AND "
+			args += 1
+			req += "status = '" + status + "' "
+		if args == 0:
+			req += "1"
+
+		req += "ORDER BY id desc"
+
+		db = self.get_db()
+		cur = db.execute(req)
+		users = cur.fetchall()
+		response = []
+		for user in users:
+			response.append(dict(user))
+		return response
+
 	def create_user(self, name, lastname, company, status, picture):
 		db = self.get_db()
 		db.execute('INSERT INTO users (prenom, nom, company, status, picture) values (?, ?, ?, ?, ?)',

@@ -53,6 +53,16 @@ def getOneUser():
     else:
         return json.dumps({'status': 500, 'message': "Missing arguments"})
 
+@app.route('/searchUsers', methods=['POST'])
+def searchUser():
+    datas = json.loads(request.get_data())
+    if 'query' in datas:
+        return json.dumps(container.search_users(datas['query']))
+    elif 'prenom' in datas and 'nom' in datas and 'company' in datas and 'status' in datas:
+        return json.dumps(container.complexe_search_users(datas['prenom'], datas['nom'], datas['company'], datas['status']))
+    else:
+        return json.dumps({'status': 500, 'message': "Missing arguments"})
+
 @app.route('/createUser', methods=['POST'])
 def createUser():
     datas = json.loads(request.get_data())

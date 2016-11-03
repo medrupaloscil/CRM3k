@@ -675,6 +675,15 @@
 		    background-color: rgba(255,255,255,.3);
 		}
 
+		.search input[type="submit"] {
+			margin-top: 20px;
+    		margin-bottom: 20px;
+		}
+
+		.search input[type="text"] {
+			color: #000;
+		}
+
 /* Footer */
 
 	#footer {

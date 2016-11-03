@@ -35,6 +35,16 @@ def admin():
     users = getJSON(baseAPI + "getAllUsers")
     return render_template('admin.html', users=users)
 
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    data = {}
+    if 'query' in request.form:
+        data = json.dumps({'query': request.form['query']})
+    else:
+        data = json.dumps({'prenom': request.form['prenom'], 'nom': request.form['nom'], 'company': request.form['company'], 'status': request.form['status']})
+    users = getJSON(baseAPI + "searchUsers", data)
+    return render_template('search.html', users=users)
+
 @app.route('/user/<user_id>')
 def user(user_id):
     data = json.dumps({'id': user_id})
