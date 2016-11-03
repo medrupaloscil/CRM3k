@@ -63,8 +63,8 @@ def add_user():
 @app.route('/removeUser/<user_id>', methods=['GET', 'POST'])
 def remove_user(user_id):
 
-    user_data = json.dumps({'id': user_id,'prenom': request.form['prenom'], 'nom': request.form['nom'], 'company': request.form['company'], 'status': request.form['status'], 'file': filename})
-    status = getJSON(baseAPI + "updateUser", user_data)
+    user_data = json.dumps({'id': user_id})
+    status = getJSON(baseAPI + "removeUser", user_data)
     if status["status"] == 200 :
         flash("User deleted with success")
     else :
@@ -91,4 +91,22 @@ def clear_database():
         flash("Users deleted with success")
     else :
         flash("Error code %i", (status["status"]))
+    return redirect(url_for('admin'))
+
+@app.route('/export')
+def export_database():
+    status = getJSON(baseAPI + "export")
+    if status["status"] == 200 :
+        flash("Database exported")
+    else :
+        flash("Error")
+    return redirect(url_for('admin'))
+
+@app.route('/import')
+def import_database():
+    status = getJSON(baseAPI + "import")
+    if status["status"] == 200 :
+        flash("Database imported")
+    else :
+        flash("Error")
     return redirect(url_for('admin'))

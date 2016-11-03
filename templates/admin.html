@@ -29,6 +29,7 @@
 	    </tr>
 	{% endfor %}
   </table>
-  <a href="#" class="admin-button">Export</a>
+  <a href="{{ url_for('export_database') }}" class="admin-button">Export</a>
+  <a href="{{ url_for('import_database') }}" class="admin-button">Import</a>
   <a href="{{ url_for('clear_database') }}" class="admin-button">Clear Database</a>
 {% endblock %}
